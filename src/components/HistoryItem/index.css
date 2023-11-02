@@ -1,0 +1,44 @@
+.logo {
+  width: 20px;
+  margin-right: 20px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.url {
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: #64748b;
+  margin-left: 6px;
+}
+
+.title-container {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.delete-icon {
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}

@@ -4,25 +4,31 @@ import './index.css'
 import HistoryItem from '../HistoryItem'
 
 class History extends Component {
-  state = {searchInput: ''}
+  constructor(props) {
+    super(props)
+    this.state = {searchInput: '', firstList: props.initialHistoryList}
+  }
 
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value})
   }
 
+  deleteHistoryItem = id => {
+    const {firstList} = this.state
+    const list = firstList.filter(eachItem => eachItem.id !== id)
+
+    this.setState({firstList: list})
+  }
+
   render() {
-    const {searchInput} = this.state
-    console.log(searchInput)
+    const {searchInput, firstList} = this.state
+    console.log(firstList)
 
-    const {initialHistoryList} = this.props
-    console.log(initialHistoryList)
-
-    const listCount = initialHistoryList.length
-    console.log(listCount)
-
-    const filteredList = initialHistoryList.filter(eachItem =>
+    const filteredList = firstList.filter(eachItem =>
       eachItem.title.toLowerCase().includes(searchInput.toLowerCase()),
     )
+
+    const listCount = filteredList.length
 
     return (
       <div>
@@ -48,13 +54,19 @@ class History extends Component {
         </div>
         <div className="history-container">
           {listCount === 0 ? (
-            <div className="container">There is no History to show</div>
-          ) : (
-            <div className=" container">
-              {filteredList.map(eachItem => (
-                <HistoryItem key={eachItem.id} eachItem={eachItem} />
-              ))}
+            <div className="empty-container">
+              <p className="empty">There is no History to show</p>
             </div>
+          ) : (
+            <ul className=" container">
+              {filteredList.map(eachItem => (
+                <HistoryItem
+                  key={eachItem.id}
+                  eachItem={eachItem}
+                  deleteHistoryItem={this.deleteHistoryItem}
+                />
+              ))}
+            </ul>
           )}
         </div>
       </div>
